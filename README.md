@@ -1,10 +1,44 @@
-# Onboarding
+Nishanth Srinivasan  
+2/13/26  
+Python 3.11
 
-Steps:
--   [ ] Fork this repository into your account.
--   [ ] Dynamically remove all `Analog Input` columns with dead sensors. These are sensors whose values stay constant. (Have the code determine which sensors are dead as this can change)
--   [ ] Graph the RPM and TPS columns separately (or in the same graph for fun lol).
--   [ ] Submit a PR back to this repository with your code.
--   [ ] Send me (@sq.id on Discord) a message with a link to your PR and which projects you are most interested in contributing to.
+# What my code does
 
-We have an open door policy but require new members to follow basic coding structures to get into team projects.
+1. Loads the CSV into a pandas DataFrame.
+2. Cleans the data by:
+   - Dropping the columns that never change.
+   - Dropping rows that have `RPM` or `TPS` missing.
+   - Removing duplicate timestamps.
+3. Derives potentially useful values:
+   - `Engine_Load_Percent` based on TPS.
+   - `RPM_Category` buckets (Idle / Low / Medium / High / Very High).
+   - A simple `Fuel_Efficiency_Index` (`Fuel Open Time / RPM`).
+4. Visualizes the results with multiple graph types.
+
+# Conclusions
+
+- The dataset contained 4 dead Analog Input sensors, which were removed.
+- RPM and TPS show a strong positive relationship(when throttle increases, RPM tends to increase).
+- Most samples fall into the higher RPM range (above 3000 RPM), based on the RPM category distribution.
+
+# Graphs
+
+#1 RPM over time (Line)
+
+![RPM Over Time](graph1_rpm_over_time.png)
+
+#2 RPM vs TPS (Scatter)
+
+![RPM vs TPS](graph2_rpm_vs_tps.png)
+
+#3 Average RPM by category (Bar)
+
+![RPM by Category](graph3_rpm_by_category.png)
+
+#4 RPM distribution (Histogram)
+
+![RPM Distribution](graph4_rpm_distribution.png)
+
+#5 RPM + TPS over time (Multi-panel)
+
+![Combined Metrics](graph5_combined_metrics.png)
